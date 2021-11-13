@@ -2,8 +2,8 @@ const sequelize = require('../config/connection');
 const { User, Post, Comment } = require('../models');
 
 const userData = require('./userData.json');
-const postData = require('./postData.json');
-const commentData = require('./commentData.json');
+const collectionData = require('./collectionData.json');
+const itemData = require('./itemData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -13,17 +13,21 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  for (const post of postData) {
-    await Post.create({
-      ...post,
+  for (const collection of collectionData) {
+    await Collection.create({
+      ...collection,
       user_id: users[Math.floor(Math.random() * users.length)].id,
     });
   }
 
-  for (const comment of commentData) {
-      await Comment.create({
-          ...comment,
-          user_id: users[Math.floor(Math.random() * userData.length)].id,
+  const colData = await Collection.findAll({});
+
+  const collect = colData.map((col) => col.get({ plain: true }));
+
+  for (const item of itemData) {
+      await Item.create({
+          ...item,
+          collection_id: collection[Math.floor(Math.random() * collect.length)].id,
       })
   }
 
