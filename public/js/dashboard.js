@@ -1,8 +1,8 @@
 const newFormHandler = async (event) => {
     event.preventDefault();
   
-    const name = document.querySelector('#post-name').value.trim();
-    const description = document.querySelector('#post-content').value.trim();
+    const title = document.querySelector('#post-title').value.trim();
+    const content = document.querySelector('#post-content').value.trim();
   
     if (title && content) {
       const response = await fetch(`/api/posts`, {
@@ -14,7 +14,7 @@ const newFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.replace('/panel');
+        document.location.replace('/dashboard');
       } else {
         alert('Failed to create post');
       }
@@ -30,7 +30,7 @@ const newFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.replace('/panel');
+        document.location.replace('/dashboard');
       } else {
         alert('Failed to delete post');
       }

@@ -8,7 +8,7 @@ Post.init(
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey:true,
+            primaryKey: true,
             autoIncrement: true,
         },
         title: {
@@ -16,9 +16,9 @@ Post.init(
             allowNull: false,        
         },
         content: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
-        date_create: {
+        date_created: {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: DataTypes.NOW,
